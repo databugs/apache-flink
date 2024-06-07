@@ -52,17 +52,33 @@ def dict_to_row(msg):
 def setup_config():
     config_path = '/opt/flink/config/app.cfg'
 
-    # Check if the file exists
-    if not os.path.isfile(config_path):
+    try:
+        config = configparser.ConfigParser()
+        config.read(config_path)
+    except Exception as e:
         logging.error(f'Configuration file not found: {config_path}')
-        return
-
-    config = configparser.ConfigParser()
-    config.read(config_path)
-
-    logging.debug(f'Sections found in the config file: {config.sections()}')
-
     return config
+
+def get_dependency_paths(subdirectory='lib'):
+    
+    current_directory = os.getcwd()
+    full_path_to_subdirectory = os.path.join(current_directory, subdirectory)
+    
+    dependencies = {}
+    
+    for root, dirs, files in os.walk(full_path_to_subdirectory):
+        for file in files:
+            if file.endswith('.jar'):
+                full_path = os.path.join(root, file)
+                url_path = 'file:///' + full_path.replace('\\', '/')
+                if 'postgres' in file:
+                    dependencies['psql'] = url_path
+                elif 'jdbc' in file:
+                    dependencies['jdbc'] = url_path
+                elif 'kafka' in file:
+                    dependencies['kafka'] = url_path
+                    
+    return dependencies
 
 def main():
     # setup environment    
@@ -74,11 +90,14 @@ def main():
     config = setup_config()
 
     # add dependencies
-    env.add_jars(
-        'file:///opt/flink/lib/flink-sql-connector-kafka-3.1.0-1.18.jar',
-        'file:///opt/flink/lib/flink-connector-jdbc-3.1.2-1.18.jar',
-        'file:///opt/flink/lib/postgresql-42.7.3.jar'
-        )
+    dependencies_paths = get_dependency_paths()
+    
+    env.add_jars(dependencies_paths['kafka'],
+                 dependencies_paths['jdbc'],
+                 dependencies_paths['psql']
+                 )
+    
+        
         
     # setup kafka source          
     kafka_source = KafkaSource.builder()\
