@@ -1,4 +1,4 @@
-# Run Flink Locally 
+# Run PyFlink Locally 
 
 ## Dependencies Downloader
 
@@ -20,6 +20,8 @@ The lib contains a script to download necessary dependencies for Apache Flink. T
    - **File**: `postgresql-42.7.3.jar`
    - **Purpose**: This driver is necessary for Flink applications that need to connect to a PostgreSQL database. It provides the means to connect, read, and write data from/to PostgreSQL databases.
 
-## Prerequisites
+#### Prerequisites
 
 Ensure that you have `curl` installed on your system.
+
+#### Instruction
