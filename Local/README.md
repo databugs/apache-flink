@@ -24,4 +24,26 @@ The lib contains a script to download necessary dependencies for Apache Flink. T
 
 Ensure that you have `curl` installed on your system.
 
-#### Instruction
+   #### Instruction
+   1. **Navigate to the to lib folder:**
+      ```
+      cd ./lib
+      ```
+
+   2. **Make the script executable by running the following command:**
+      ```
+      chmod +x download-dependencies.sh
+      ```
+
+   3. **Execute the script:**
+      ```
+      ./download-dependencies.sh
+      ```
+      If this runs successfully, you will find find all the downloaded dependencies in the lib folder.
+
+   4. **Go back to the previous folder:**
+      ```
+      cd ..
+      ```
+
+
