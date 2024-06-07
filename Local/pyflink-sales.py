@@ -50,7 +50,7 @@ def dict_to_row(msg):
     return Row(**data)
 
 def setup_config():
-    config_path = '/opt/flink/config/app.cfg'
+    config_path = 'secrets/app.cfg'
 
     try:
         config = configparser.ConfigParser()
@@ -86,18 +86,15 @@ def main():
     env.set_runtime_mode(RuntimeExecutionMode.STREAMING)
     env.set_parallelism(1)
 
-    # setup config
-    config = setup_config()
-
     # add dependencies
     dependencies_paths = get_dependency_paths()
-    
     env.add_jars(dependencies_paths['kafka'],
                  dependencies_paths['jdbc'],
                  dependencies_paths['psql']
                  )
     
-        
+    # setup config
+    config = setup_config()    
         
     # setup kafka source          
     kafka_source = KafkaSource.builder()\
