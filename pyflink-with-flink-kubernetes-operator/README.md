@@ -9,29 +9,71 @@ Deploying PyFlink applications on Kubernetes involves several steps, including s
 - Minikube
 - helm
 
-Start up docker and follow the next steps.
+Ensure Docker Desktop for Windows/Mac is installed for seamless integration with Minikube.
+
 
 ## Steps
-1. For Windows users, you need to run this before starting minikube
-   ```bash
+1. **Set Docker Context (Windows Users Only)**
+   Open your terminal and execute:
+   ```
    Docker context use default
    ```
-2. Start Minikube
+2. **Start Minikube**
    ```
    minikube start
    ```
-3. Deploy the certificate manager
+   Note: Starting Minikube may take a few minutes.
+
+3. **Deploy the certificate manager**
    ```bash
    kubectl create -f https://github.com/jetstack/cert-manager/releases/download/v1.8.2/cert-manager.yaml
    ```
+   Cert-manager automates the management and issuance of TLS certificates within Kubernetes.
+   
 4. Deploy Flink Kubernetes Operator
    ```
    helm repo add flink-operator-repo https://downloads.apache.org/flink/flink-kubernetes-operator-1.8.0/
    helm install flink-kubernetes-operator flink-operator-repo/flink-kubernetes-operator
    ```
-   You may verify your installation by running
+   Verify the installation:
    ```
    kubectl get pods
    ```
-6. Create configMap
+5. Clone the Repository
+   ```
+   git clone https://github.com/databugs/data-streaming-with-pyflink.git
+   ````
+6. Navigate to Directory
+   ```
+   cd pyflink-with-flink-kubernetes-operator
+   ```
+
+7. Create configMap
+   Fill in the necessary values in `app_config.yaml`. Then, apply them:
+   ```
+   kubectl apply -f app_config.yaml
+   kubectl apply -f py_config.yaml
+   ```
+   Check the creation:
+   ```
+   kubectl get configMap
+   ```
+8. Deploy the Flink app to start data streaming
+   ```
+   kubectl apply -f deployment.yaml
+   ```
+   Monitor the deployment status:
+   ```
+   bash kubectl rollout status deployment/sales-dev
+   ```
+
+## Bonus
+Install [K9s](https://k9scli.io/topics/install/) is a terminal-based interface to interact with your Kubernetes clusters. Install it to easily view and manage your clusters:
+```
+k9s -c pods
+```
+
+## Monitoring and Troubleshooting
+
+After deployment, monitor your PyFlink application by accessing logs and metrics. Common issues and troubleshooting tips will be added here.
    
