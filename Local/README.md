@@ -43,13 +43,12 @@ Before you start, make sure you have the following installed on your system:
    ```
    cd Local
    ```
-   There are 
+   There are two subfolders in the local directory:
+   - lib: contains a `.sh` file that will download all the needed flink dependencies.
+   - secrets: contains a `app.cfg` file that you are expected to update with information like kafka `server`, `topic`, `username`, `password`, and database connection details.
 
 ## Dependencies Downloader
-
-### Overview
-
-The lib contains a script to download necessary dependencies for Apache Flink. These dependencies include connectors for JDBC, Kafka, and PostgreSQL, which are essential for integrating Flink with various data sources and sinks.
+The lib folder contains a script to download necessary dependencies for Apache Flink. These dependencies include connectors for JDBC, Kafka, and PostgreSQL, which are essential for integrating Flink with various data sources and sinks.
 
 #### Dependencies
 
@@ -90,5 +89,50 @@ Ensure that you have `curl` installed on your system.
       ```
       cd ..
       ```
+## Update app.cfg
+Update each key-value pair with the correct value.
+```
+[kafka]
+bootstrap_server = xxxxxx
+topic = xxxxxxx
 
+[security]
+username = xxxxx
+password = xxxxx
 
+[postgres]
+url = xxxxx
+username = xxxxx
+password = xxxxx
+```
+
+## Kafka Setup
+To use this code without any changes, you'll need to create an account on [confluent cloud](confluent.cloud), and create a kafka cluster.
+
+1. Use the datagen connector to create a sample data that this pyflink app will stream.
+![alt text](data-source.png)
+
+2. Choose the orders sample data and launch.
+![alt text](data-gen.png)
+This will create a kafka topic that populate it with data. Don't forget to pause the connection to save your free credits.
+
+3. To get the kafka api and secret, go to client and select python, and follow the instructions to download the secrets.
+
+## Run the app
+1. Confirm that the PostgreSQL DB is up and running.
+2. Create a table:
+   ```
+   CREATE TABLE public.sales (
+      ordertime varchar NULL,
+      orderid varchar NULL,
+      itemid varchar NULL,
+      orderunits varchar NULL,
+      city varchar NULL,
+      state varchar NULL,
+      zipcode varchar NULL
+   );
+   ```
+3. Run the python script
+   ```
+   python sales.py
+   ```
