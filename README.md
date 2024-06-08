@@ -17,6 +17,20 @@ This will create a kafka topic that populate it with data. Don't forget to pause
 
 3. To get the kafka api and secret, go to client and select python, and follow the instructions to download the secrets.
 
-
+## Postgres Setup
+Confirm that the PostgreSQL DB is up and running.
+1. Create a table:
+   ```SQL
+   CREATE TABLE public.sales (
+      ordertime varchar NULL,
+      orderid varchar NULL,
+      itemid varchar NULL,
+      orderunits varchar NULL,
+      city varchar NULL,
+      state varchar NULL,
+      zipcode varchar NULL
+   );
+   ```
+   
 ## Instruction
 Navigate to each directory and follow the instructions.
