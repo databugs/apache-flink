@@ -13,9 +13,9 @@ To use this pyflink script without any changes, you'll need to create an account
 
 2. Choose the orders sample data and launch.
 ![alt text](data-gen.png)
-This will create a kafka topic that populate it with data. Don't forget to pause the connection to save your free credits.
+This will create a Kafka and populate it with sample sales data. Don't forget to pause the connection to save your free credits.
 
-3. To get the kafka api and secret, go to client and select python, and follow the instructions to download the secrets.
+3. To get the Kafka api and secret, go to the client module and select python. Follow the instructions to download the secrets.
 
 ## Postgres Setup
 Confirm that the PostgreSQL DB is up and running.
