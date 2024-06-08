@@ -1,4 +1,49 @@
-# Run PyFlink Locally 
+# Overview
+This example streams data from confluent kafka and sinks the data into a PostgreSQL DB using Pyflink.
+
+## Architeture
+- Source: Confluent kafka
+- Sink: PostreSQL
+
+## Setting Up a Python Virtual Environment
+This guide will help you set up a Python virtual environment and install Apache PyFlink version 1.18.1. Apache PyFlink enables you to write, execute, and manage Flink applications using Python.
+
+### Prerequisites
+Before you start, make sure you have the following installed on your system:
+- Python (version 3.8 or later). This has been tested with python 3.10.2
+- pip (Python package installer)
+
+### Steps
+1. Create a virtual environment:
+   ```
+   python -m venv venv
+   ```
+2. Activate the virtual environment:
+   - On Windows
+      ```
+      venv\Scripts\activate
+      ```
+   - On Unix or MacOS:
+      ```
+      source venv/bin/activate
+      ```
+3. Installing Apache PyFlink 1.18.1
+   ```
+   pip install --upgrade pip
+
+   pip install apache-flink==1.18.1
+   ```
+
+## Getting Started
+1. Clone this repository
+   ```
+   git clone https://github.com/databugs/apache-flink.git
+   ```
+2. Navigate to Local Folder
+   ```
+   cd Local
+   ```
+   There are 
 
 ## Dependencies Downloader
 
