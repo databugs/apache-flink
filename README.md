@@ -6,4 +6,4 @@ Local Development: A setup for running PyFlink applications locally, ideal for d
 Kubernetes Deployment: Instructions and configurations for deploying PyFlink applications on a Kubernetes cluster using the Flink Kubernetes Operator.
 
 ## Instruction
-Navigate to each directory and the instructions.
+Navigate to each directory and follow the instructions.
