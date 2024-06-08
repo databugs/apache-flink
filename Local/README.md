@@ -28,7 +28,7 @@ Before you start, make sure you have the following installed on your system:
       source venv/bin/activate
       ```
 3. Installing Apache PyFlink 1.18.1
-   ```
+   ```bash
    pip install --upgrade pip
 
    pip install apache-flink==1.18.1
@@ -36,11 +36,11 @@ Before you start, make sure you have the following installed on your system:
 
 ## Getting Started
 1. Clone this repository
-   ```
+   ```bash
    git clone https://github.com/databugs/apache-flink.git
    ```
 2. Navigate to Local Folder
-   ```
+   ```bash
    cd Local
    ```
    There are two subfolders in the local directory:
@@ -70,23 +70,23 @@ Ensure that you have `curl` installed on your system.
 
    #### Instruction
    1. **Navigate to the to lib folder:**
-      ```
+      ```bash
       cd ./lib
       ```
 
    2. **Make the script executable by running the following command:**
-      ```
+      ```bash
       chmod +x download-dependencies.sh
       ```
 
    3. **Execute the script:**
-      ```
+      ```bash
       ./download-dependencies.sh
       ```
       If this runs successfully, you will find find all the downloaded dependencies in the lib folder.
 
    4. **Go back to the previous folder:**
-      ```
+      ```bash
       cd ..
       ```
 ## Update app.cfg
@@ -121,7 +121,7 @@ This will create a kafka topic that populate it with data. Don't forget to pause
 ## Run the app
 1. Confirm that the PostgreSQL DB is up and running.
 2. Create a table:
-   ```
+   ```SQL
    CREATE TABLE public.sales (
       ordertime varchar NULL,
       orderid varchar NULL,
